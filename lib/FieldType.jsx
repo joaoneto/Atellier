@@ -61,29 +61,26 @@ class FieldType extends React.Component {
   }
 
   _renderArrayInput({ type, defaultValue, name }) {
-    // let options = (this.state.defaultValue || []).map((value, index) => {
-    //   return <option key={index} value={value} selected={this.state.defaultValue === value}>{value}</option>;
-    // });
-    //
-    // return (
-    //   <div className="fieldtype">
-    //     <label>{this.state.name}</label>
-    //     <select onChange={this.handleChange}>
-    //       {options}
-    //     </select>
-    //   </div>
-    // );
+    let options = (defaultValue || []).map((value, index) => {
+      return <option key={index} value={value}>{value}</option>;
+    });
 
-    // TODO: implement
-    // return this._renderText({ type, defaultValue, name });
-    return null;
+    return (
+      <div className="properties-field">
+        <label>{name}</label>
+        <select onBlur={this.handleChange} onChange={this.handleChange}>
+          {options}
+        </select>
+      </div>
+    );
   }
 
-  _renderObjectInput({ type, defaultValue, name }) {    
+  _renderObjectInput({ type, defaultValue, name }) {
     return null;
   }
 
   _handleChange = ( response ) => {
+    console.log(response)
     let value = response.target && response.target.value || response;
     this.props.onChange(this.props.name, value);
   };
